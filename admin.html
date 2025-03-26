@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Панель администратора | Dota 2 Student Tournaments</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Панель администратора</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">На сайт</a></li>
+                    <li><a href="#" id="logout">Выйти</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="admin-dashboard">
+            <div class="admin-tabs">
+                <button class="tab-btn active" data-tab="tournaments">Турниры</button>
+                <button class="tab-btn" data-tab="teams">Команды</button>
+                <button class="tab-btn" data-tab="bracket">Сетка</button>
+            </div>
+            
+            <div id="tournaments-tab" class="tab-content active">
+                <h2>Управление турнирами</h2>
+                <button id="add-tournament-btn" class="btn">Добавить турнир</button>
+                
+                <div class="tournament-list">
+                    <h3>Активные турниры</h3>
+                    <div id="active-tournaments">
+                        <!-- Active tournaments will be loaded here -->
+                    </div>
+                    
+                    <h3>Завершённые турниры</h3>
+                    <div id="past-tournaments-admin">
+                        <!-- Past tournaments will be loaded here -->
+                    </div>
+                </div>
+            </div>
+            
+            <div id="teams-tab" class="tab-content">
+                <h2>Зарегистрированные команды</h2>
+                <div class="team-list" id="teams-container">
+                    <!-- Teams will be loaded here -->
+                </div>
+            </div>
+            
+            <div id="bracket-tab" class="tab-content">
+                <h2>Управление турнирной сеткой</h2>
+                <div class="form-group">
+                    <label for="select-tournament">Выберите турнир:</label>
+                    <select id="select-tournament">
+                        <option value="">-- Выберите турнир --</option>
+                    </select>
+                </div>
+                
+                <div id="bracket-controls">
+                    <button id="generate-bracket-btn" class="btn" disabled>Сгенерировать сетку</button>
+                    <button id="update-bracket-btn" class="btn" disabled>Обновить результаты</button>
+                </div>
+                
+                <div id="bracket-container">
+                    <!-- Bracket will be loaded here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Add Tournament Modal -->
+    <div id="add-tournament-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Добавить новый турнир</h2>
+            <form id="add-tournament-form">
+                <div class="form-group">
+                    <label for="tournament-title">Название турнира:</label>
+                    <input type="text" id="tournament-title" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="tournament-date">Дата проведения:</label>
+                    <input type="date" id="tournament-date" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="tournament-format">Формат:</label>
+                    <select id="tournament-format" required>
+                        <option value="Double Elimination">Double Elimination (Двойное выбывание)</option>
+                        <option value="Single Elimination">Single Elimination (Одиночное выбывание)</option>
+                        <option value="Round Robin">Round Robin (Круговой)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="tournament-type">Тип:</label>
+                    <select id="tournament-type" required>
+                        <option value="Онлайн">Онлайн</option>
+                        <option value="Оффлайн">Оффлайн</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="tournament-description">Описание (необязательно):</label>
+                    <textarea id="tournament-description" rows="4"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="tournament-max-teams">Максимальное количество команд:</label>
+                    <input type="number" id="tournament-max-teams" min="4" max="32" value="8">
+                </div>
+                
+                <button type="submit" class="btn">Создать турнир</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Tournament Modal -->
+    <div id="edit-tournament-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Редактировать турнир</h2>
+            <form id="edit-tournament-form">
+                <input type="hidden" id="edit-tournament-id">
+                <div class="form-group">
+                    <label for="edit-tournament-title">Название турнира:</label>
+                    <input type="text" id="edit-tournament-title" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="edit-tournament-date">Дата проведения:</label>
+                    <input type="date" id="edit-tournament-date" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="edit-tournament-status">Статус:</label>
+                    <select id="edit-tournament-status" required>
+                        <option value="Открыт прием заявок">Открыт прием заявок</option>
+                        <option value="Регистрация закрыта">Регистрация закрыта</option>
+                        <option value="Идет турнир">Идет турнир</option>
+                        <option value="Завершен">Завершен</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="edit-tournament-format">Формат:</label>
+                    <select id="edit-tournament-format" required>
+                        <option value="Double Elimination">Double Elimination (Двойное выбывание)</option>
+                        <option value="Single Elimination">Single Elimination (Одиночное выбывание)</option>
+                        <option value="Round Robin">Round Robin (Круговой)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="edit-tournament-type">Тип:</label>
+                    <select id="edit-tournament-type" required>
+                        <option value="Онлайн">Онлайн</option>
+                        <option value="Оффлайн">Оффлайн</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="edit-tournament-description">Описание (необязательно):</label>
+                    <textarea id="edit-tournament-description" rows="4"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="edit-tournament-max-teams">Максимальное количество команд:</label>
+                    <input type="number" id="edit-tournament-max-teams" min="4" max="32">
+                </div>
+                
+                <button type="submit" class="btn">Сохранить изменения</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Match Result Modal -->
+    <div id="match-result-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Результат матча</h2>
+            <form id="match-result-form">
+                <input type="hidden" id="match-id">
+                <input type="hidden" id="match-round">
+                <input type="hidden" id="match-bracket">
+                
+                <div class="form-group">
+                    <label for="team1-name">Команда 1:</label>
+                    <input type="text" id="team1-name" readonly>
+                </div>
+                
+                <div class="form-group">
+                    <label for="team2-name">Команда 2:</label>
+                    <input type="text" id="team2-name" readonly>
+                </div>
+                
+                <div class="form-group">
+                    <label>Победитель:</label>
+                    <div class="radio-group">
+                        <input type="radio" id="winner-team1" name="winner" value="team1" required>
+                        <label for="winner-team1" id="winner-team1-label">Команда 1</label>
+                        
+                        <input type="radio" id="winner-team2" name="winner" value="team2" required>
+                        <label for="winner-team2" id="winner-team2-label">Команда 2</label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="match-score">Счет (необязательно):</label>
+                    <input type="text" id="match-score" placeholder="например, 2-1">
+                </div>
+                
+                <button type="submit" class="btn">Сохранить результат</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/admin.js"></script>
+</body>
+</html>
