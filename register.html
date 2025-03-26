@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация на турнир | Dota 2 Student Tournaments</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Dota 2 Student Tournaments</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="index.html#current-tournaments">Текущие турниры</a></li>
+                    <li><a href="bracket.html">Турнирная сетка</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="registration">
+            <h2>Регистрация на турнир <span id="tournament-name"></span></h2>
+            <form id="registration-form">
+                <div class="form-group">
+                    <label for="team-name">Название команды:</label>
+                    <input type="text" id="team-name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="group-number">Номер учебной группы:</label>
+                    <input type="text" id="group-number" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="captain-steam">Ссылка на Steam аккаунт капитана:</label>
+                    <input type="url" id="captain-steam" required>
+                </div>
+                
+                <h3>Контакты игроков в Telegram:</h3>
+                
+                <div class="form-group">
+                    <label for="carry-tg">Керри (1 позиция):</label>
+                    <input type="text" id="carry-tg" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="mid-tg">Мид (2 позиция):</label>
+                    <input type="text" id="mid-tg" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="offlane-tg">Оффлейнер (3 позиция):</label>
+                    <input type="text" id="offlane-tg" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="fourth-tg">Четвёртый (4 позиция):</label>
+                    <input type="text" id="fourth-tg" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="fifth-tg">Пятый (5 позиция):</label>
+                    <input type="text" id="fifth-tg" required>
+                </div>
+                
+                <button type="submit" class="btn">Отправить заявку</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Dota 2 Student Tournaments. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <div id="success-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Заявка отправлена!</h2>
+            <p>Ваша заявка на участие в турнире успешно отправлена. Мы свяжемся с вами в Telegram для подтверждения.</p>
+            <button class="btn" onclick="window.location.href='index.html'">Вернуться на главную</button>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
