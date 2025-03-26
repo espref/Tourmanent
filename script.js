@@ -136,13 +136,15 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Simulate sending data to Telegram
-    function sendToTelegram(data) {
-        console.log('Data sent to Telegram:', data);
-        // In a real implementation, this would use the Telegram Bot API
-        // Example: fetch(`https://api.telegram.org/botYOUR_BOT_TOKEN/sendMessage?chat_id=YOUR_CHAT_ID&text=${encodeURIComponent(JSON.stringify(data))}`);
-    }
+    // 
+    async function sendToTelegram(data) {
+    const botToken = "7566216856:AAGcB9UeyPDkPERnle7UW45dhhzZYSz8yd8";
+    const chatId = "1221814162";
+    const text = `Новая заявка!\nКоманда: ${data.teamName}\nКапитан: ${data.captainSteam}`;
     
+    const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(text)}`;
+    await fetch(url);
+}
     // Setup modals
     function setupModals() {
         const loginBtn = document.getElementById('admin-login');
