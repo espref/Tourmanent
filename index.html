@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dota 2 Student Tournaments</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Dota 2 Student Tournaments</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="#current-tournaments">Текущие турниры</a></li>
+                    <li><a href="#past-tournaments">Прошедшие турниры</a></li>
+                    <li><a href="bracket.html">Турнирная сетка</a></li>
+                    <li><a href="#" id="admin-login">Администратор</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="hero">
+            <div class="hero-content">
+                <h2>Соревнуйся с лучшими студенческими командами</h2>
+                <p>Прими участие в турнирах по Dota 2 и покажи своё мастерство!</p>
+            </div>
+        </section>
+
+        <section id="current-tournaments">
+            <h2>Текущие турниры</h2>
+            <div class="tournament-cards" id="tournaments-container">
+                <!-- Tournaments will be loaded here via JavaScript -->
+            </div>
+        </section>
+
+        <section id="past-tournaments">
+            <h2>Прошедшие турниры</h2>
+            <div class="tournament-cards" id="past-tournaments-container">
+                <!-- Past tournaments will be loaded here -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Dota 2 Student Tournaments. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Вход для администратора</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="admin-username">Логин:</label>
+                    <input type="text" id="admin-username" required>
+                </div>
+                <div class="form-group">
+                    <label for="admin-password">Пароль:</label>
+                    <input type="password" id="admin-password" required>
+                </div>
+                <button type="submit" class="btn">Войти</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
